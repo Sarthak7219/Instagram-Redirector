@@ -4,32 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Redirect Page</title>
+    <title>Redirecting...</title>
     <script>
+        // Check if the user is in the Instagram in-app browser
         function isInstagramBrowser() {
-            // Check the user agent to determine if the user is in the Instagram in-app browser
             return /Instagram/i.test(navigator.userAgent);
         }
 
-        function redirectToExternal(url) {
+        // Redirect to a specified URL if the user is in the Instagram browser
+        function redirectToWebsite() {
             if (isInstagramBrowser()) {
-                // Redirect to the specified URL if in Instagram browser
-                window.location.href = url;
-            } else {
-                // If not in Instagram, you might want to handle differently or just allow normal browsing
-                window.location.href = url; // You can adjust this as needed
+                window.location.href = 'https://sarthak-portfolio-f76d5.web.app/'; // Replace with your actual URL
             }
         }
 
-        // Call the redirect function when the page loads
-        window.onload = function () {
-            redirectToExternal('https://yourwebsite.com'); // Replace with your actual URL
-        };
+        window.onload = redirectToWebsite;
     </script>
 </head>
 
 <body>
-    <h1>Redirecting...</h1>
+    <h1>Hi this is my instagram redirector webpage</h1>
 </body>
 
 </html>
