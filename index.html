@@ -4,59 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open in External Browser</title>
-    <style>
-        #openPrompt {
-            display: none;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
-        #openPrompt p {
-            font-size: 18px;
-            color: #333;
-        }
-
-        #openPrompt button {
-            font-size: 16px;
-            padding: 10px 15px;
-            margin-top: 10px;
-        }
-    </style>
+    <title>Your Redirect Page</title>
     <script>
-        function detectInstagramBrowser() {
-            const ua = navigator.userAgent || navigator.vendor;
-            return ua.indexOf('Instagram') > -1;
+        function isInstagramBrowser() {
+            // Check the user agent to determine if the user is in the Instagram in-app browser
+            return /Instagram/i.test(navigator.userAgent);
         }
 
-        function promptToOpenExternally() {
-            const openPrompt = document.getElementById("openPrompt");
-            openPrompt.style.display = "block"; // Show prompt
-
-            // Set the link to the target URL for users to click
-            document.getElementById("externalLink").href = "x-safari-https://sarthak-portfolio-f76d5.web.app";
-        }
-
-        window.onload = function () {
-            const targetUrl = 'https://sarthak-portfolio-f76d5.web.app/';
-            if (detectInstagramBrowser()) {
-                promptToOpenExternally(targetUrl);
+        function redirectToExternal(url) {
+            if (isInstagramBrowser()) {
+                // Redirect to the specified URL if in Instagram browser
+                window.location.href = url;
             } else {
-                // Directly redirect if not in Instagram
-                window.location.href = targetUrl;
+                // If not in Instagram, you might want to handle differently or just allow normal browsing
+                window.location.href = url; // You can adjust this as needed
             }
+        }
+
+        // Call the redirect function when the page loads
+        window.onload = function () {
+            redirectToExternal('https://sarthak-portfolio-f76d5.web.app/'); // Replace with your actual URL
         };
     </script>
 </head>
 
 <body>
-    <div id="openPrompt">
-        <p>Please open this link in your device's default browser (Safari or Chrome):</p>
-        <a id="externalLink" href="#" target="_blank">
-            <button>Open in Browser</button>
-        </a>
-    </div>
+    <h1>Redirecting...</h1>
 </body>
 
 </html>
