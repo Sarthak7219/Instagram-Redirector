@@ -19,7 +19,7 @@
                 // For iOS devices (iPhone/iPad)
                 if (/iPad|iPhone|iPod/.test(ua)) {
                     // Attempt to open in Safari
-                    window.location.href = 'googlechrome://' + targetUrl; // This should ideally open in Chrome, if available
+                    window.location.href = 'x-safari-https://' + targetUrl;
                 } else {
                     // For Android devices
                     window.location.href = 'intent:' + targetUrl + '#Intent;end'; // This opens the link in a browser
@@ -34,7 +34,7 @@
 
         // Call the redirect function on page load
         window.onload = function () {
-            const targetUrl = 'https://sarthak-portfolio-f76d5.web.app/'; // Your actual URL
+            const targetUrl = 'sarthak-portfolio-f76d5.web.app'; // Your actual URL
             redirectToExternalBrowser(targetUrl);
         };
     </script>
