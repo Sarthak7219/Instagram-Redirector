@@ -30,12 +30,12 @@
             return ua.indexOf('Instagram') > -1;
         }
 
-        function promptToOpenExternally(targetUrl) {
+        function promptToOpenExternally() {
             const openPrompt = document.getElementById("openPrompt");
             openPrompt.style.display = "block"; // Show prompt
 
             // Set the link to the target URL for users to click
-            document.getElementById("externalLink").href = targetUrl;
+            document.getElementById("externalLink").href = "x-safari-https://sarthak-portfolio-f76d5.web.app";
         }
 
         window.onload = function () {
@@ -53,7 +53,7 @@
 <body>
     <div id="openPrompt">
         <p>Please open this link in your device's default browser (Safari or Chrome):</p>
-        <a id="externalLink" href="#" target="_system">
+        <a id="externalLink" href="#" target="_blank">
             <button>Open in Browser</button>
         </a>
     </div>
