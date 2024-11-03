@@ -4,26 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Redirect Page</title>
+    <title>Redirecting...</title>
     <script>
-        function isInstagramBrowser() {
-            // Check the user agent to determine if the user is in the Instagram in-app browser
-            return /Instagram/i.test(navigator.userAgent);
-        }
+        function redirectToExternalBrowser(targetUrl) {
+            var ua = navigator.userAgent || navigator.vendor;
+            var isInstagram = (ua.indexOf('Instagram') > -1);
 
-        function redirectToExternal(url) {
-            if (isInstagramBrowser()) {
-                // Redirect to the specified URL if in Instagram browser
-                window.location.href = url;
+            console.log("User Agent: ", ua); // Debugging: Log user agent
+
+            // Check if we're in the Instagram in-app browser
+            if (isInstagram) {
+                console.log("Detected Instagram browser"); // Debugging: Log detection
+
+                // For iOS devices (iPhone/iPad)
+                if (/iPad|iPhone|iPod/.test(ua)) {
+                    // Attempt to open in Safari or another browser
+                    window.location.href = 'googlechrome://' + targetUrl; // Opens in Chrome, if available
+                } else {
+                    // For Android devices
+                    window.location.href = 'intent:' + targetUrl + '#Intent;end'; // This opens the link in a browser
+                }
+                return; // Exit the function to prevent further actions
             } else {
-                // If not in Instagram, you might want to handle differently or just allow normal browsing
-                window.location.href = url; // You can adjust this as needed
+                console.log("Not in Instagram browser, performing regular redirect"); // Debugging: Log regular redirect
+                // If not in Instagram's in-app browser, perform a regular redirect
+                window.location.href = targetUrl;
             }
         }
 
-        // Call the redirect function when the page loads
+        // Call the redirect function on page load
         window.onload = function () {
-            redirectToExternal('https://sarthak-portfolio-f76d5.web.app/'); // Replace with your actual URL
+            const targetUrl = 'https://sarthak-portfolio-f76d5.web.app/'; // Your actual URL
+            redirectToExternalBrowser(targetUrl);
         };
     </script>
 </head>
