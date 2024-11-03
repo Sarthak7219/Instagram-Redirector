@@ -7,34 +7,35 @@
     <title>Redirecting...</title>
     <script>
         function redirectToExternalBrowser(targetUrl) {
-            var ua = navigator.userAgent || navigator.vendor;
-            var isInstagram = (ua.indexOf('Instagram') > -1);
-
-            console.log("User Agent: ", ua); // Debugging: Log user agent
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             // Check if we're in the Instagram in-app browser
-            if (isInstagram) {
-                console.log("Detected Instagram browser"); // Debugging: Log detection
+            if (userAgent.includes("Instagram")) {
+                // Instagram-specific redirection
+                const link = document.createElement('a');
+                link.href = targetUrl;
+                link.target = '_blank';
 
-                // For iOS devices (iPhone/iPad)
-                if (/iPad|iPhone|iPod/.test(ua)) {
-                    // Attempt to open in Safari
-                    window.location.href = 'googlechrome://' + targetUrl; // This should ideally open in Chrome, if available
-                } else {
-                    // For Android devices
-                    window.location.href = 'intent:' + targetUrl + '#Intent;end'; // This opens the link in a browser
-                }
-                return; // Exit the function to prevent further actions
+                // Programmatically trigger the click
+                document.body.appendChild(link);
+                link.click();
+
+                // Clean up the link element afterward
+                document.body.removeChild(link);
+
+                // Optionally, add a fallback if initial redirection does not work
+                setTimeout(() => {
+                    window.location.href = targetUrl; // Attempt direct redirect as a backup
+                }, 1000);
             } else {
-                console.log("Not in Instagram browser, performing regular redirect"); // Debugging: Log regular redirect
                 // If not in Instagram's in-app browser, perform a regular redirect
                 window.location.href = targetUrl;
             }
         }
 
-        // Call the redirect function on page load
+        // Usage
         window.onload = function () {
-            const targetUrl = 'https://sarthak-portfolio-f76d5.web.app/'; // Your actual URL
+            const targetUrl = 'https://sarthak-portfolio-f76d5.web.app/'; // Replace with your actual URL
             redirectToExternalBrowser(targetUrl);
         };
     </script>
