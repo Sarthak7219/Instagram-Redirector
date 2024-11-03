@@ -6,24 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        // Check if the user is in the Instagram in-app browser
-        function isInstagramBrowser() {
-            return /Instagram/i.test(navigator.userAgent);
-        }
+        function redirectToExternalBrowser(targetUrl) {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-        // Redirect to a specified URL if the user is in the Instagram browser
-        function redirectToWebsite() {
-            if (isInstagramBrowser()) {
-                window.location.href = 'https://sarthak-portfolio-f76d5.web.app/'; // Replace with your actual URL
+            // Check if we're in the Instagram in-app browser
+            if (userAgent.includes("Instagram")) {
+                // Instagram-specific redirection
+                const link = document.createElement('a');
+                link.href = targetUrl;
+                link.target = '_blank';
+
+                // Programmatically trigger the click
+                document.body.appendChild(link);
+                link.click();
+
+                // Clean up the link element afterward
+                document.body.removeChild(link);
+
+                // Optionally, add a fallback if initial redirection does not work
+                setTimeout(() => {
+                    window.location.href = targetUrl; // Attempt direct redirect as a backup
+                }, 1000);
+            } else {
+                // If not in Instagram's in-app browser, perform a regular redirect
+                window.location.href = targetUrl;
             }
         }
 
-        window.onload = redirectToWebsite;
+        // Usage
+        window.onload = function () {
+            const targetUrl = 'https://your-target-url.com'; // Replace with your actual URL
+            redirectToExternalBrowser(targetUrl);
+        };
     </script>
 </head>
 
 <body>
-    <h1>Hi this is my instagram redirector webpage</h1>
+    <h1>Redirecting...</h1>
 </body>
 
 </html>
