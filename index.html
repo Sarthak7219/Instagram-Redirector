@@ -6,37 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        function redirectToExternalBrowser(targetUrl) {
-            var ua = navigator.userAgent || navigator.vendor;
-            var isInstagram = (ua.indexOf('Instagram') > -1);
-
-            console.log("User Agent: ", ua); // Debugging: Log user agent
-
-            // Check if we're in the Instagram in-app browser
-            if (isInstagram) {
-                console.log("Detected Instagram browser"); // Debugging: Log detection
-
-                // For iOS devices (iPhone/iPad)
-                if (/iPad|iPhone|iPod/.test(ua)) {
-                    // Attempt to open in Safari
-                    window.location.href = 'googlechrome://' + targetUrl; // This should ideally open in Chrome, if available
-                } else {
-                    // For Android devices
-                    window.location.href = 'intent:' + targetUrl + '#Intent;end'; // This opens the link in a browser
-                }
-                return; // Exit the function to prevent further actions
-            } else {
-                console.log("Not in Instagram browser, performing regular redirect"); // Debugging: Log regular redirect
-                // If not in Instagram's in-app browser, perform a regular redirect
-                window.location.href = targetUrl;
-            }
+        if (navigator.userAgent.includes("Instagram")) {
+            window.location.href = "https://sarthak-portfolio-f76d5.web.app/";
         }
-
-        // Call the redirect function on page load
-        window.onload = function () {
-            const targetUrl = 'https://sarthak-portfolio-f76d5.web.app/'; // Your actual URL
-            redirectToExternalBrowser(targetUrl);
-        };
     </script>
 </head>
 
