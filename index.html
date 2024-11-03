@@ -34,7 +34,7 @@
             const openPrompt = document.getElementById("openPrompt");
             openPrompt.style.display = "block"; // Show prompt
 
-            // Optional: Link directly to target URL for users to click
+            // Set the link to the target URL for users to click
             document.getElementById("externalLink").href = targetUrl;
         }
 
@@ -52,8 +52,8 @@
 
 <body>
     <div id="openPrompt">
-        <p>Please open this link in your device's browser (Safari or Chrome):</p>
-        <a id="externalLink" href="#" target="_blank">
+        <p>Please open this link in your device's default browser (Safari or Chrome):</p>
+        <a id="externalLink" href="#" target="_system">
             <button>Open in Browser</button>
         </a>
     </div>
