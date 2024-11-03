@@ -19,7 +19,7 @@
                 // For iOS devices (iPhone/iPad)
                 if (/iPad|iPhone|iPod/.test(ua)) {
                     // Attempt to open in Safari
-                    window.location.href = 'googlechrome://' + targetUrl; // This should ideally open in Chrome, if available
+                    window.location.href = 'x-safari-https://' + targetUrl; // This should ideally open in Chrome, if available
                 } else {
                     // For Android devices
                     window.location.href = 'intent:' + targetUrl + '#Intent;end'; // This opens the link in a browser
